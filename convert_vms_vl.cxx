@@ -11,13 +11,59 @@
 int main(int argc, char* argv[])
 {
     std::fstream f;
-    const char* filein = argv[1];
-    if (argc < 2 || filein == NULL)
+  int c;
+  opterr = 0;
+  bool nocc = false;
+  const char* cvalue = "\n";
+
+  while ((c = getopt (argc, argv, "nc:")) != -1)
+    switch (c)
+      {
+      case 'n':
+        nocc = true;
+        break;
+      case 'c':
+        switch(optarg[0])
+        {
+            case 'l':
+                cvalue = "\n";
+                break;
+            case 'm':
+                cvalue = "\r";
+                break;
+            case 'w':
+                cvalue = "\r\n";
+                break;
+            default:
+                cvalue = "\n";
+                break;
+         }
+         break;
+      case '?':
+        if (optopt == 'c')
+          fprintf (stderr, "Option -%c requires an argument.\n", optopt);
+        else if (isprint (optopt))
+          fprintf (stderr, "Unknown option `-%c'.\n", optopt);
+        else
+          fprintf (stderr,
+                   "Unknown option character `\\x%x'.\n",
+                   optopt);
+        return -1;
+      default:
+        return -1;
+      }
+
+    if ((argc - optind) < 1)
     {
         std::cerr << "No filename given" << std::endl;
         return -1;
     }
-    f.open(argv[1], std::ios::in | std::ios::binary);
+    if (nocc)
+    {
+        cvalue = "\0";
+    }
+    const char* filein = argv[optind];
+    f.open(filein, std::ios::in | std::ios::binary);
     if (!f.good())
     {
         std::cerr << "File open error for \""  << filein << "\"" << std::endl;
@@ -41,7 +87,7 @@ int main(int argc, char* argv[])
     for(i = 0; i < slength; )
     {
         l = sbuffer[i]; // record length in bytes
-        sbuffer[i] = '\0' + 256 * '\n';
+        sbuffer[i] = cvalue[0] + 256 * cvalue[1]; // replace length with CC
         i += 1; // length field
         i += (l + 1) / 2; // record data, but padded to even byte number
         if (l % 2 != 0)
@@ -66,6 +112,7 @@ int main(int argc, char* argv[])
 		break;
 	}
     }
-    std::cout << "\n";
+    // add final CC
+    std::cout << cvalue;
     return 0;
 }
