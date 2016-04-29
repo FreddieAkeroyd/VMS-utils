@@ -4,8 +4,10 @@
 ///
 
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <unistd.h>
 
 // convert 16 bit length field of VMS variable length(VL) to \n
 int main(int argc, char* argv[])
