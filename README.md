@@ -6,12 +6,12 @@ This will convert a VMS Variable Length (VL) format file into
 a stream of bytes with additional line endings if required.
 
 command line option with convert_vms_vl are:
-*   -cl   (default) add linux style line ending (\n)
-*   -cw   add windows style line endings (\r\n)
-*   -cm   add (old?) mac style line ending (\r)
-*   -n    do not add any \n, \r etc characters to end of record, for when a VL file contains binary rather than ASCII data
+*   **-cl**   (default) add linux style line ending (\n)
+*   **-cw**   add windows style line endings (\r\n)
+*   **-cm**   add (old?) mac style line ending (\r)
+*   **-n**    do not add any \n, \r etc. characters to end of records, for when a VL file contains binary rather than ASCII data
 
-e.g. to generate windows style line ending use:
+e.g. to generate windows style line endings use:
 
     ./convert_vms_vl -cw orig_file > new_file
 
