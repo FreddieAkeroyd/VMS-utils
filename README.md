@@ -1,8 +1,8 @@
-# Some useful VMS migration utilities
+# Some useful OpenVMS migration utilities
 
 ## convert_vms_vl
 
-This will convert a VMS Variable Length (VL) format file into
+This will convert a OpenVMS Variable Length (VL) format file into
 a stream of bytes with additional line endings if required.
 
 command line option with convert_vms_vl are:
