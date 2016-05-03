@@ -18,3 +18,5 @@ e.g. for windows line ending use
 
     ./convert_vms_vl -cw orig_file > new_file
 
+A Windows (MinGW) compiled binary is provided in  convert_vms_vl_win32.exe
+
