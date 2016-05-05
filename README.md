@@ -28,5 +28,5 @@ script to simplify running **convert_vms_vl** on a number of files
     sh convert_vms_vl.sh -cw *.for
 
 will create a subdirectory called "converted" for output files and then 
-process all files matching *.for in the current directory using
+process all files matching \*.for in the current directory using
 **convert_vms_vl** and the supplied options
