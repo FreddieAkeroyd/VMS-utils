@@ -17,9 +17,24 @@ if test ! -w converted; then
     echo Cannot write to directory "converted"
     exit
 fi
+args=""
+files=""
 for i in $*; do
+    case $i in
+        -*)
+            args="$args $i"
+            ;;
+        *)
+            files="$files $i"
+            ;;
+    esac
+done
+if test ! -z "$args"; then 
+    echo Converting using options arguments $args
+fi
+for i in $files; do
     if test -f "$i"; then 
-        "${mydir}/convert_vms_vl" "$i" > "converted/$i"
+        "${mydir}/convert_vms_vl" $args "$i" > "converted/$i"
     fi 
 done
 
