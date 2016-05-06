@@ -31,6 +31,7 @@ if test ! -z "$args"; then
 fi
 for i in $files; do
     if test -f "$i"; then 
+        echo Converting file \"$i\"
         "./convert_vms_vl" $args "$i" > "converted/$i"
     fi 
 done
